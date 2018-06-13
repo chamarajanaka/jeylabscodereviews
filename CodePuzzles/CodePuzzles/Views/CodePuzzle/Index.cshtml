@@ -1,0 +1,269 @@
+﻿@model CodePuzzles.Models.CodePuzzleViewModel
+    
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    <div class="col-md-6">
+        <h3>Shape Description:</h3>
+        <hr />
+        <br />
+        @Html.TextAreaFor(model => model.ShapeDescription, new { htmlAttributes = new { @class = "form-control" }, @cols = "1000", @rows = "6" })
+    </div>
+
+    <div class="col-md-6">
+        <h3>Test Cases</h3>
+        <hr />
+        Draw a Pentagon with a side length of 200 <br />
+        Draw a Square with a side length of 200 <br />
+        Draw a rectangle with a width of 250 and a height of 100 <br />
+        Draw a Octagon with a side length of 200 <br />
+        Draw a circle with a radius of 150 <br />
+        Draw a Hexagon with a side length of 200 <br />
+        Draw a Heptagon with a side length of 200 <br />
+        Draw an Equilateral Triangle with a side length of 200 <br />
+        Draw an oval with a radius of 75 <br />
+        Draw an isosceles triangle with a height of 200 and a width of 100
+    </div>
+
+    <div class="col-md-10" style="margin-top:10px;margin-bottom:10px">
+        <input type="submit" value="Create Shape" class="btn btn-primary" />
+    </div>
+
+    <div>
+        <div style="color:red">@ViewBag.Message</div>
+        <canvas id="myCanvas" width="700" height="700" style="border:1px solid #d3d3d3;">
+            Your browser does not support the HTML5 canvas tag.
+        </canvas>
+    </div>
+
+    </div>
+}
+
+<script>
+
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+
+    @if (Model.Shape.ShapeName == CodePuzzleBusinessServices.SupportedEnumShapes.Square.ToString())
+    {
+        <text>
+        ctx.rect(20, 20, @Model.Shape.SideLength, @Model.Shape.SideLength);
+        ctx.stroke();
+        </text>
+    }
+    else if (Model.Shape.ShapeName == CodePuzzleBusinessServices.SupportedEnumShapes.Pentagon.ToString())
+    {
+        <text>
+
+        // hexagon
+        var numberOfSides = 5,
+            size = @Model.Shape.SideLength,
+            Xcenter = 350,
+            Ycenter = 250,
+            step = 2 * Math.PI / numberOfSides,//Precalculate step value
+            shift = (Math.PI / 180.0) * -18;//Quick fix ;)
+
+        ctx.beginPath();
+        //cxt.moveTo (Xcenter +  size * Math.cos(0), Ycenter +  size *  Math.sin(0));
+
+        for (var i = 0; i <= numberOfSides; i++) {
+            var curStep = i * step + shift;
+            ctx.lineTo(Xcenter + size * Math.cos(curStep), Ycenter + size * Math.sin(curStep));
+        }
+
+        ctx.strokeStyle = "#000000";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        </text>
+    }
+    else if (Model.Shape.ShapeName == CodePuzzleBusinessServices.SupportedEnumShapes.Rectangle.ToString())
+    {
+        <text>
+        ctx.rect(20, 20, @Model.Shape.Width, @Model.Shape.Height);
+        ctx.stroke();
+        </text>
+    }
+    else if (Model.Shape.ShapeName == CodePuzzleBusinessServices.SupportedEnumShapes.Octagon.ToString())
+    {
+        <text>
+
+     var numberOfSides = 8,
+            size = @Model.Shape.SideLength,
+            Xcenter = 350,
+            Ycenter = 250,
+            step = 2 * Math.PI / numberOfSides,//Precalculate step value
+            shift = (Math.PI / 180.0) * -22;//Quick fix ;)
+
+        ctx.beginPath();
+
+        for (var i = 0; i <= numberOfSides; i++) {
+            var curStep = i * step + shift;
+            ctx.lineTo(Xcenter + size * Math.cos(curStep), Ycenter + size * Math.sin(curStep));
+        }
+
+        ctx.strokeStyle = "#000000";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        </text>
+    }
+    else if (Model.Shape.ShapeName == CodePuzzleBusinessServices.SupportedEnumShapes.Circle.ToString())
+    {
+        <text>
+        ctx.beginPath();
+        ctx.arc(350, 250, @Model.Shape.Radius, 0, 2 * Math.PI);
+        ctx.stroke();
+        </text>
+    }
+    else if (Model.Shape.ShapeName == CodePuzzleBusinessServices.SupportedEnumShapes.Hexagon.ToString())
+    {
+        <text>
+
+     var numberOfSides = 6,
+            size = @Model.Shape.SideLength,
+            Xcenter = 350,
+            Ycenter = 250,
+            step = 2 * Math.PI / numberOfSides,//Precalculate step value
+            shift = (Math.PI / 180.0) * -60;//Quick fix ;)
+
+        ctx.beginPath();
+
+        for (var i = 0; i <= numberOfSides; i++) {
+            var curStep = i * step + shift;
+            ctx.lineTo(Xcenter + size * Math.cos(curStep), Ycenter + size * Math.sin(curStep));
+        }
+
+        ctx.strokeStyle = "#000000";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        </text>
+    }
+    else if (Model.Shape.ShapeName == CodePuzzleBusinessServices.SupportedEnumShapes.Heptagon.ToString())
+    {
+        <text>
+
+     var numberOfSides = 7,
+            size = @Model.Shape.SideLength,
+            Xcenter = 350,
+            Ycenter = 250,
+            step = 2 * Math.PI / numberOfSides,//Precalculate step value
+            shift = (Math.PI / 180.0) * -60;//Quick fix ;)
+
+        ctx.beginPath();
+
+        for (var i = 0; i <= numberOfSides; i++) {
+            var curStep = i * step + shift;
+            ctx.lineTo(Xcenter + size * Math.cos(curStep), Ycenter + size * Math.sin(curStep));
+        }
+
+        ctx.strokeStyle = "#000000";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        </text>
+    }
+    else if (Model.Shape.ShapeName == CodePuzzleBusinessServices.SupportedEnumShapes.EquilateralTriangle.ToString())
+    {
+        <text>
+            drawEqTriangle(ctx, @Model.Shape.SideLength, c.width/2, c.height/2);
+        </text>
+    }
+    else if (Model.Shape.ShapeName == CodePuzzleBusinessServices.SupportedEnumShapes.IsoscelesTriangle.ToString())
+    {
+        <text>
+            drawIsoscelesTriangle(ctx, @Model.Shape.Width, @Model.Shape.Height, 350, 250);
+        </text>
+    }
+    else if (Model.Shape.ShapeName == CodePuzzleBusinessServices.SupportedEnumShapes.Oval.ToString())
+    {
+        <text>
+            drawOval(ctx, c, 0, 0, @Model.Shape.Radius);
+        </text>
+    }
+
+        // drawOval(ctx, c, centerX, centerY, radius)
+   function drawEqTriangle(ctx, side, cx, cy) {
+
+            var h = side * (Math.sqrt(3) / 2);
+
+            ctx.save();
+            ctx.translate(cx, cy);
+
+            ctx.beginPath();
+
+            ctx.moveTo(0, -h / 2);
+            ctx.lineTo(-side / 2, h / 2);
+            ctx.lineTo(side / 2, h / 2);
+            ctx.lineTo(0, -h / 2);
+
+            ctx.stroke();
+
+            ctx.closePath();
+            ctx.save();
+
+            }
+
+        function drawIsoscelesTriangle(ctx, width, height, cx, cy) {
+
+
+            //ctx.save();
+            //ctx.translate(cx, cy);
+
+            //ctx.beginPath();
+
+            //var path = new Path2D();
+            //path.moveTo((width) + 50, height);
+            //path.lineTo((width), (height) - 50);
+            //path.lineTo((width) - 50, height);
+            //ctx.fill(path);
+
+            ctx.save();
+            ctx.translate(cx, cy);
+
+            ctx.beginPath();
+
+            ctx.moveTo((width) + 50, height);
+            ctx.lineTo((width), (height) - 50);
+            ctx.lineTo((width) - 50, height);
+            ctx.lineTo(width + 50, height);
+
+            ctx.stroke();
+
+            ctx.closePath();
+            ctx.save();
+
+        }
+
+        function drawOval(ctx, c, centerX, centerY, radius) {
+
+            // save state
+            ctx.save();
+
+            // translate context
+            ctx.translate(c.width / 2, c.height / 2);
+
+            ctx.scale(2, 1);
+
+            // draw circle which will be stretched into an oval
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+
+            // restore to original state
+            ctx.restore();
+
+            ctx.stroke();
+
+        }
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

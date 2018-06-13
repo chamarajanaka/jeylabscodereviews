@@ -1,0 +1,6 @@
+C:\Work\Contracts\CodePuzzles\CodePuzzleBusinessServices\bin\Debug\CodePuzzleBusinessServices.dll
+C:\Work\Contracts\CodePuzzles\CodePuzzleBusinessServices\bin\Debug\CodePuzzleBusinessServices.pdb
+C:\Work\Contracts\CodePuzzles\CodePuzzleBusinessServices\obj\Debug\CodePuzzleBusinessServices.csprojResolveAssemblyReference.cache
+C:\Work\Contracts\CodePuzzles\CodePuzzleBusinessServices\obj\Debug\CodePuzzleBusinessServices.csproj.CoreCompileInputs.cache
+C:\Work\Contracts\CodePuzzles\CodePuzzleBusinessServices\obj\Debug\CodePuzzleBusinessServices.dll
+C:\Work\Contracts\CodePuzzles\CodePuzzleBusinessServices\obj\Debug\CodePuzzleBusinessServices.pdb
